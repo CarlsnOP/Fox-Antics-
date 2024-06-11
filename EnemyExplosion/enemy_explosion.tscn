@@ -1,0 +1,68 @@
+[gd_scene load_steps=11 format=3 uid="uid://caurbuufmqpa5"]
+
+[ext_resource type="Texture2D" uid="uid://clifat5iprk6l" path="res://assets/explosion/enemy-deadth.png" id="1_albh8"]
+[ext_resource type="AudioStream" uid="uid://j6cmmt724d0d" path="res://assets/sound/pickup3.ogg" id="1_rvn61"]
+[ext_resource type="Script" path="res://EnemyExplosion/enemy_explosion.gd" id="2_x7vs8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smksb"]
+atlas = ExtResource("1_albh8")
+region = Rect2(0, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uq0nr"]
+atlas = ExtResource("1_albh8")
+region = Rect2(40, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idsip"]
+atlas = ExtResource("1_albh8")
+region = Rect2(80, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1u3y5"]
+atlas = ExtResource("1_albh8")
+region = Rect2(120, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ypfmj"]
+atlas = ExtResource("1_albh8")
+region = Rect2(160, 0, 40, 41)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j70kg"]
+atlas = ExtResource("1_albh8")
+region = Rect2(200, 0, 40, 41)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_22imh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smksb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uq0nr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idsip")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1u3y5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ypfmj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j70kg")
+}],
+"loop": false,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="EnemyExplosion" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_22imh")
+autoplay = "default"
+frame = 2
+frame_progress = 0.201034
+script = ExtResource("2_x7vs8")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_rvn61")
+autoplay = true
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]
