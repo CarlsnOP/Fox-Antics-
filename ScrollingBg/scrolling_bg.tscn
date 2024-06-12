@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://7ohvn30yfkkq"]
+
+[ext_resource type="Script" path="res://ScrollingBg/scrolling_bg.gd" id="1_wueaa"]
+
+[node name="ScrollingBg" type="ParallaxBackground"]
+script = ExtResource("1_wueaa")
+level_number = 4

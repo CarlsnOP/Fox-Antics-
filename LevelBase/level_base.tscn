@@ -1,11 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://cwuj8rkolxfcf"]
+[gd_scene load_steps=12 format=3 uid="uid://cwuj8rkolxfcf"]
 
 [ext_resource type="Script" path="res://LevelBase/level_base.gd" id="1_b4i0a"]
 [ext_resource type="Texture2D" uid="uid://cxldb2fhige81" path="res://assets/tiles/Terrain (16x16).png" id="1_by3ac"]
 [ext_resource type="PackedScene" uid="uid://bnmn4b0vrr04y" path="res://PlayerCam/player_cam.tscn" id="2_6qeqn"]
 [ext_resource type="PackedScene" uid="uid://xlf2t4pr0xn4" path="res://Player/player.tscn" id="3_a5s21"]
-[ext_resource type="PackedScene" uid="uid://bp7eoqhcadcu4" path="res://MovingPlatform/moving_platform.tscn" id="3_gk0mt"]
-[ext_resource type="PackedScene" uid="uid://d0xka0f7eg4cb" path="res://FloorSpikes/floor_spikes.tscn" id="6_td0km"]
+[ext_resource type="PackedScene" uid="uid://cdj8ixhnrsnv0" path="res://Boss/boss.tscn" id="8_ufvom"]
+[ext_resource type="PackedScene" uid="uid://deevsbjhatbd" path="res://Checkpoint/checkpoint.tscn" id="9_27m2c"]
+[ext_resource type="PackedScene" uid="uid://7ohvn30yfkkq" path="res://ScrollingBg/scrolling_bg.tscn" id="9_rll2o"]
+[ext_resource type="AudioStream" uid="uid://on43eatlf07t" path="res://assets/sound/Flowing Rocks.ogg" id="15_r00xp"]
+[ext_resource type="PackedScene" uid="uid://c62j2vmkc3f40" path="res://HUD/hud.tscn" id="16_hafnf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_krxrk"]
 texture = ExtResource("1_by3ac")
@@ -557,35 +560,39 @@ physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_krxrk")
 
 [node name="LevelBase" type="Node2D"]
-position = Vector2(-2, 31)
 script = ExtResource("1_b4i0a")
+
+[node name="ScrollingBg" parent="." instance=ExtResource("9_rll2o")]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_7mxb5")
 format = 2
-layer_0/tile_data = PackedInt32Array(-65536, 458752, 0, -65535, 458752, 0, -65534, 458752, 0, -65533, 458752, 0, -65532, 458752, 0, -65531, 458752, 0, -65530, 458752, 0, -65529, 458752, 0, -65528, 458752, 0, -65527, 458752, 0, -65526, 458752, 0, -65525, 458752, 0, -65524, 458752, 0, -65523, 458752, 0, -65522, 458752, 0, -65521, 458752, 0, -65520, 458752, 0, -65519, 458752, 0, -65518, 458752, 0, -65517, 458752, 0, -65516, 458752, 0, -65515, 458752, 0, -65514, 458752, 0, -65513, 458752, 0, -65512, 458752, 0, -65511, 458752, 0, -65510, 458752, 0, -65507, 458752, 0, -65506, 458752, 0, -65505, 458752, 0, -65504, 458752, 0, -65503, 458752, 0, -65502, 458752, 0, -65500, 458752, 0, -65499, 458752, 0, -65498, 458752, 0, -65497, 458752, 0, -65496, 458752, 0, -65495, 458752, 0, -65494, 458752, 0, -65491, 458752, 0, -65490, 458752, 0, -65489, 458752, 0, -65488, 458752, 0, -65487, 458752, 0, -65486, 458752, 0, -65485, 458752, 0, -65484, 458752, 0, -65483, 458752, 0, -65482, 458752, 0, -65481, 458752, 0, -65480, 458752, 0, -65479, 458752, 0, -65478, 458752, 0, -65477, 458752, 0, -65476, 458752, 0, -65475, 458752, 0, -65474, 458752, 0, -65473, 458752, 0, -65501, 458752, 0, -327668, 458752, 0, -327667, 458752, 0, -327666, 458752, 0, -524268, 458752, 0, -524267, 458752, 0, -524266, 458752, 0, -655336, 458752, 0, -655335, 458752, 0, -655334, 458752, 0, -786404, 458752, 0, -786403, 458752, 0, -786402, 458752, 0, -917472, 458752, 0, -917471, 458752, 0, -917470, 458752, 0, -1048540, 458752, 0, -1048539, 458752, 0, -1048538, 458752, 0, -1179608, 458752, 0, -1179607, 458752, 0, -1179606, 458752, 0, -851961, 458752, 0, -851960, 458752, 0, -851959, 458752, 0, -983037, 458752, 0, -983036, 458752, 0, -983035, 458752, 0, -1114104, 458752, 0, -1114103, 458752, 0, -1114102, 458752, 0, -1114099, 458752, 0, -1114098, 458752, 0, -1114097, 458752, 0, -131036, 1179648, 4, -196572, 1179648, 4)
+layer_0/tile_data = PackedInt32Array(-2, 458752, 0, -1, 458752, 0, -65536, 458752, 0, -65535, 458752, 0, -65534, 458752, 0)
 
 [node name="PlayerCam" parent="." instance=ExtResource("2_6qeqn")]
-position = Vector2(270, -149)
 zoom = Vector2(2, 2)
+limit_left = -500
+limit_top = -500
+limit_right = 2000
+limit_bottom = 0
 
 [node name="Player" parent="." instance=ExtResource("3_a5s21")]
-position = Vector2(154, -46)
-
-[node name="MovingPlatform" parent="." node_paths=PackedStringArray("p1", "p2") instance=ExtResource("3_gk0mt")]
-position = Vector2(50, -40)
-p1 = NodePath("../Markers/MP1_2")
-p2 = NodePath("../Markers/MP1_1")
+position = Vector2(13, -34)
 
 [node name="Markers" type="Node" parent="."]
 
-[node name="MP1_1" type="Marker2D" parent="Markers"]
-position = Vector2(50, -40)
-
-[node name="MP1_2" type="Marker2D" parent="Markers"]
-position = Vector2(50, -140)
-
 [node name="Paths" type="Node" parent="."]
 
-[node name="FloorSpikes" parent="." instance=ExtResource("6_td0km")]
-position = Vector2(201, -77)
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_r00xp")
+autoplay = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("16_hafnf")]
+
+[node name="Boss" parent="." instance=ExtResource("8_ufvom")]
+position = Vector2(845, -14)
+
+[node name="Checkpoint" parent="." instance=ExtResource("9_27m2c")]
+position = Vector2(927, -16)

@@ -5,12 +5,9 @@ extends Node2D
 
 
 func _ready():
-	pass 
+	Engine.time_scale = 1
 
 
 func _process(delta):
-	pass
-
-
-func _physics_process(delta):
 	player_cam.position = player.position
+

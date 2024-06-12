@@ -1,0 +1,157 @@
+[gd_scene load_steps=8 format=3 uid="uid://c62j2vmkc3f40"]
+
+[ext_resource type="Script" path="res://HUD/hud.gd" id="1_8i12n"]
+[ext_resource type="LabelSettings" uid="uid://vee8ptms5wqd" path="res://assets/GL_48_white.tres" id="1_idgbt"]
+[ext_resource type="Texture2D" uid="uid://bkrfr3c6aexye" path="res://assets/items/pixel heart 2.png" id="2_odpfj"]
+[ext_resource type="LabelSettings" uid="uid://m4ssb4ek6ouv" path="res://assets/LG_64_white.tres" id="3_ehjky"]
+[ext_resource type="FontFile" uid="uid://bo5rsypy0d74o" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="4_qrdfo"]
+[ext_resource type="LabelSettings" uid="uid://bicqop0vvnhan" path="res://assets/LG_24_White.tres" id="4_vq7ew"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_kpmow"]
+font = ExtResource("4_qrdfo")
+font_size = 64
+font_color = Color(0.978794, 0.429733, 0.596728, 1)
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 14
+shadow_color = Color(0, 0, 0, 0.666667)
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8i12n")
+
+[node name="MC" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="HB" type="HBoxContainer" parent="MC"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="ScoreLabel" type="Label" parent="MC/HB"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0000"
+label_settings = ExtResource("1_idgbt")
+vertical_alignment = 1
+
+[node name="HB" type="HBoxContainer" parent="MC/HB"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="L1" type="TextureRect" parent="MC/HB/HB"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("2_odpfj")
+stretch_mode = 4
+
+[node name="L2" type="TextureRect" parent="MC/HB/HB"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("2_odpfj")
+stretch_mode = 4
+
+[node name="L3" type="TextureRect" parent="MC/HB/HB"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("2_odpfj")
+stretch_mode = 4
+
+[node name="L4" type="TextureRect" parent="MC/HB/HB"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("2_odpfj")
+stretch_mode = 4
+
+[node name="L5" type="TextureRect" parent="MC/HB/HB"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("2_odpfj")
+stretch_mode = 4
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.00392157, 0.0980392, 0.745098)
+
+[node name="vb_LevelComplete" type="VBoxContainer" parent="ColorRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ColorRect/vb_LevelComplete"]
+layout_mode = 2
+text = "LEVEL COMPLETE!"
+label_settings = ExtResource("3_ehjky")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="ColorRect/vb_LevelComplete"]
+layout_mode = 2
+text = "Press Jump for next level"
+label_settings = ExtResource("4_vq7ew")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="vb_GameOver" type="VBoxContainer" parent="ColorRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ColorRect/vb_GameOver"]
+layout_mode = 2
+text = "Game Over!"
+label_settings = SubResource("LabelSettings_kpmow")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="ColorRect/vb_GameOver"]
+layout_mode = 2
+text = "Press Jump for main menu"
+label_settings = ExtResource("4_vq7ew")
+horizontal_alignment = 1
+vertical_alignment = 1
