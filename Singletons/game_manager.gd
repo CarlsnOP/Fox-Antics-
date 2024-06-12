@@ -9,6 +9,7 @@ var _level_scenes = {}
 
 func _ready():
 	init_level_scenes()
+	ScoreManager.reset_score()
 	
 func init_level_scenes() -> void:
 	for ln in range(1, TOTAL_LEVELS + 1):

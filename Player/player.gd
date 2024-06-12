@@ -19,6 +19,7 @@ const RUN_SPEED: float = 120.0
 const MAX_FALL: float = 400.0
 const JUMP_VELOCITY: float = -400.0
 const _HURT_JUMP_VELOCITY: Vector2 = Vector2(0, -150.0)
+const FALLEN_OFF: float = 100.0
 
 
 enum PLAYER_STATE { IDLE, RUN, JUMP, FALL, HURT, DASH }
@@ -26,13 +27,16 @@ enum PLAYER_STATE { IDLE, RUN, JUMP, FALL, HURT, DASH }
 
 var _state: PLAYER_STATE = PLAYER_STATE.IDLE
 var _invincible: bool = false
+var _lives: int = 5
 
 
 func _ready():
-	pass # Replace with function body.
+	SignalManager.on_player_hit.emit(_lives)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	fallen_off()
+	
 	if is_on_floor() == false:
 		velocity.y += GRAVITY * delta	
 		
@@ -50,6 +54,13 @@ func update_debug_label() -> void:
 		PLAYER_STATE.keys()[_state],
 		velocity.x, velocity.y
 	]
+
+func fallen_off() -> void:
+	if global_position.y < FALLEN_OFF:
+		return
+	
+	_lives = 1
+	reduce_lives()
 
 func shoot() -> void:
 	if sprite_2d.flip_h == true:
@@ -114,15 +125,27 @@ func apply_hurt_jump() -> void:
 	animation_player.play("hurt")
 	velocity = _HURT_JUMP_VELOCITY
 	hurt_timer.start()
-	SignalManager.on_player_hit.emit(0)
 
 func go_invincible() -> void:
 	_invincible = true
 	animation_player_invincible.play("invincible")
 	invincible_timer.start()
 
+func reduce_lives() -> bool:
+	_lives -= 1
+	SignalManager.on_player_hit.emit(_lives)
+	
+	if _lives <= 0:
+		SignalManager.on_game_over.emit()
+		set_physics_process(false)
+		return false
+	return true
+
 func apply_hit() -> void:
 	if _invincible == true:
+		return
+	
+	if reduce_lives() == false:
 		return
 		
 	go_invincible()
