@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cm806xahomxv2"]
+[gd_scene load_steps=10 format=3 uid="uid://cm806xahomxv2"]
 
 [ext_resource type="Script" path="res://Main/main.gd" id="1_kntjm"]
 [ext_resource type="Texture2D" uid="uid://contk20ja21s" path="res://assets/backgrounds/game_background_4/game_background_4.png" id="1_pjwjm"]
@@ -15,10 +15,42 @@ shadow_size = 5
 shadow_color = Color(0, 0, 0, 0.666667)
 shadow_offset = Vector2(5, 2)
 
-[sub_resource type="LabelSettings" id="LabelSettings_8q82j"]
+[sub_resource type="LabelSettings" id="LabelSettings_wb5fh"]
+font = ExtResource("2_7rkp2")
+font_size = 24
+font_color = Color(0.84447, 0.999957, 0.920308, 1)
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.666667)
+shadow_offset = Vector2(5, 2)
+
+[sub_resource type="Animation" id="Animation_42qg0"]
+resource_name = "pulse"
+length = 1.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0.196078)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8nncq"]
+_data = {
+"pulse": SubResource("Animation_42qg0")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_twmn0"]
 font = ExtResource("2_7rkp2")
 font_size = 40
-font_color = Color(0.84447, 0.999957, 0.920308, 1)
+font_color = Color(0.843137, 1, 0.588235, 1)
 outline_size = 5
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 2
@@ -38,17 +70,17 @@ texture = ExtResource("1_pjwjm")
 expand_mode = 3
 
 [node name="VB" type="VBoxContainer" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -182.5
-offset_top = -32.0
-offset_right = 182.5
-offset_bottom = 32.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Spacer2" type="Control" parent="VB"]
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="VB"]
 layout_mode = 2
@@ -57,10 +89,27 @@ label_settings = SubResource("LabelSettings_4kx5x")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Label2" type="Label" parent="VB"]
+layout_mode = 2
+text = "Press space to start"
+label_settings = SubResource("LabelSettings_wb5fh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VB/Label2"]
+libraries = {
+"": SubResource("AnimationLibrary_8nncq")
+}
+autoplay = "pulse"
+
+[node name="Spacer" type="Control" parent="VB"]
+layout_mode = 2
+size_flags_vertical = 3
+
 [node name="LabelHighScore" type="Label" parent="VB"]
 layout_mode = 2
 text = "HighScore: 0000"
-label_settings = SubResource("LabelSettings_8q82j")
+label_settings = SubResource("LabelSettings_twmn0")
 horizontal_alignment = 1
 vertical_alignment = 1
 

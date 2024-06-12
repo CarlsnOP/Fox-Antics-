@@ -13,6 +13,7 @@ const SOUND_PICKUP = "pickup"
 const SOUND_BOSS_ARRIVE = "boss_arrive"
 const SOUND_JUMP = "jump"
 const SOUND_WIN = "win"
+const SOUND_DASH = "dash"
 
 
 var SOUNDS = {
@@ -28,9 +29,9 @@ var SOUNDS = {
 	SOUND_MUSIC2: preload("res://assets/sound/Flowing Rocks.ogg"),
 	SOUND_PICKUP: preload("res://assets/sound/pickup5.ogg"),
 	SOUND_BOSS_ARRIVE: preload("res://assets/sound/boss_arrive.wav"),
-	SOUND_WIN: preload("res://assets/sound/you_win.ogg")
+	SOUND_WIN: preload("res://assets/sound/you_win.ogg"),
+	SOUND_DASH: preload("res://assets/sound/dash.mp3")
 }
-
 
 func play_clip(player: AudioStreamPlayer2D, clip_key: String):
 	if SOUNDS.has(clip_key) == false:

@@ -18,10 +18,10 @@ config/icon="res://icon.png"
 [autoload]
 
 SignalManager="*res://Singletons/signal_manager.gd"
-ScoreManager="*res://Singletons/Score_manager.gd"
-GameManager="*res://Singletons/game_manager.gd"
 SoundManager="*res://Singletons/sound_manager.gd"
+GameManager="*res://Singletons/game_manager.gd"
 ObjectMaker="*res://Singletons/object_maker.gd"
+ScoreManager="*res://Singletons/Score_manager.gd"
 
 [display]
 

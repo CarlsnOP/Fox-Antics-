@@ -4,8 +4,9 @@ extends Control
 @onready var color_rect = $ColorRect
 @onready var vb_level_complete = $ColorRect/vb_LevelComplete
 @onready var vb_game_over = $ColorRect/vb_GameOver
-@onready var hb_hearts = $MC/HB/HB_Hearts
-@onready var score_label = $MC/HB/ScoreLabel
+@onready var hb_hearts = $MC/VBoxContainer/HB/HB_Hearts
+@onready var score_label = $MC/VBoxContainer/HB/ScoreLabel
+@onready var level_label = $MC/VBoxContainer/LevelLabel
 
 
 var _hearts: Array
@@ -21,14 +22,14 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if vb_level_complete.visible == true:
-		if Input.is_action_just_pressed("jump") == true:
+		if Input.is_action_just_pressed("shoot") == true:
 			GameManager.load_next_level_scene()
 	if vb_game_over.visible == true:
-		if Input.is_action_just_pressed("jump") == true:
+		if Input.is_action_just_pressed("shoot") == true:
 			GameManager.load_main_scene()
+	level_label.text = str("Level: ", GameManager.get_current_level(), "/3")
 
 func show_hud() -> void:
-	#Engine.time_scale = 0
 	get_tree().paused = true
 	color_rect.visible = true
 

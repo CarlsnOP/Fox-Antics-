@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://xlf2t4pr0xn4"]
+[gd_scene load_steps=21 format=3 uid="uid://xlf2t4pr0xn4"]
 
 [ext_resource type="Texture2D" uid="uid://i3gcjsxc30rb" path="res://assets/player/player.png" id="1_rte2f"]
 [ext_resource type="Script" path="res://Player/player.gd" id="1_ytwtl"]
 [ext_resource type="PackedScene" uid="uid://b388ibxrhdgac" path="res://Shooter/shooter.tscn" id="3_qodg7"]
+[ext_resource type="PackedScene" uid="uid://ub6lfkkhv8wa" path="res://Dash/dash.tscn" id="4_j3o7q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1w1ms"]
 size = Vector2(10, 16)
@@ -24,6 +25,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_j07lw"]
 resource_name = "dash"
+length = 0.2
 
 [sub_resource type="Animation" id="Animation_uieu7"]
 resource_name = "fall"
@@ -119,6 +121,43 @@ _data = {
 "run": SubResource("Animation_lm5hr")
 }
 
+[sub_resource type="Animation" id="Animation_resr8"]
+resource_name = "dash"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.405178, 0.592296, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_y2m7s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hmm4b"]
+_data = {
+"RESET": SubResource("Animation_y2m7s"),
+"dash": SubResource("Animation_resr8")
+}
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_irxs8"]
 radius = 7.0
 height = 18.0
@@ -179,7 +218,12 @@ root_node = NodePath("../CollisionShape2D")
 libraries = {
 "": SubResource("AnimationLibrary_y6h4b")
 }
-autoplay = "idle"
+
+[node name="DashPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimationPlayer")
+libraries = {
+"": SubResource("AnimationLibrary_hmm4b")
+}
 
 [node name="DebugLabel" type="Label" parent="."]
 offset_left = -14.0
@@ -195,6 +239,10 @@ asa"
 [node name="SoundPlayer" type="AudioStreamPlayer2D" parent="." groups=["player"]]
 visible = false
 volume_db = -10.0
+
+[node name="EffectPlayer" type="AudioStreamPlayer2D" parent="." groups=["player"]]
+visible = false
+volume_db = 15.0
 
 [node name="HitBox" type="Area2D" parent="."]
 collision_layer = 2
@@ -213,14 +261,26 @@ libraries = {
 "": SubResource("AnimationLibrary_d6sjf")
 }
 
-[node name="InvincibleTimer" type="Timer" parent="."]
+[node name="Dash" parent="." instance=ExtResource("4_j3o7q")]
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="InvincibleTimer" type="Timer" parent="Timers"]
 wait_time = 3.0
 one_shot = true
 
-[node name="HurtTimer" type="Timer" parent="."]
+[node name="HurtTimer" type="Timer" parent="Timers"]
 wait_time = 0.4
 one_shot = true
 
+[node name="DashTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="DashCDTimer" type="Timer" parent="Timers"]
+one_shot = true
+
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
-[connection signal="timeout" from="InvincibleTimer" to="." method="_on_invincible_timer_timeout"]
-[connection signal="timeout" from="HurtTimer" to="." method="_on_hurt_timer_timeout"]
+[connection signal="timeout" from="Timers/InvincibleTimer" to="." method="_on_invincible_timer_timeout"]
+[connection signal="timeout" from="Timers/HurtTimer" to="." method="_on_hurt_timer_timeout"]
+[connection signal="timeout" from="Timers/DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="Timers/DashCDTimer" to="." method="_on_dash_cd_timer_timeout"]

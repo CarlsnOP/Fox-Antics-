@@ -1,11 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://c62j2vmkc3f40"]
+[gd_scene load_steps=10 format=3 uid="uid://c62j2vmkc3f40"]
 
 [ext_resource type="Script" path="res://HUD/hud.gd" id="1_8i12n"]
 [ext_resource type="LabelSettings" uid="uid://vee8ptms5wqd" path="res://assets/GL_48_white.tres" id="1_idgbt"]
 [ext_resource type="Texture2D" uid="uid://bkrfr3c6aexye" path="res://assets/items/pixel heart 2.png" id="2_odpfj"]
 [ext_resource type="LabelSettings" uid="uid://m4ssb4ek6ouv" path="res://assets/LG_64_white.tres" id="3_ehjky"]
+[ext_resource type="FontFile" uid="uid://dsgcwqlt3dii0" path="res://assets/fonts/gemunu-libre-v8-latin-700.ttf" id="4_lf1nv"]
 [ext_resource type="FontFile" uid="uid://bo5rsypy0d74o" path="res://assets/fonts/LuckiestGuy-Regular.ttf" id="4_qrdfo"]
 [ext_resource type="LabelSettings" uid="uid://bicqop0vvnhan" path="res://assets/LG_24_White.tres" id="4_vq7ew"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3tdj8"]
+font = ExtResource("4_lf1nv")
+font_size = 30
+outline_size = 2
+outline_color = Color(0.0901961, 0.0901961, 0.0901961, 1)
+shadow_color = Color(0.298039, 0.686275, 0.705882, 0.643137)
 
 [sub_resource type="LabelSettings" id="LabelSettings_kpmow"]
 font = ExtResource("4_qrdfo")
@@ -38,56 +46,65 @@ theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="HB" type="HBoxContainer" parent="MC"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MC"]
+layout_mode = 2
+
+[node name="HB" type="HBoxContainer" parent="MC/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="ScoreLabel" type="Label" parent="MC/HB"]
+[node name="ScoreLabel" type="Label" parent="MC/VBoxContainer/HB"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "00000"
 label_settings = ExtResource("1_idgbt")
 vertical_alignment = 1
 
-[node name="HB_Hearts" type="HBoxContainer" parent="MC/HB"]
+[node name="HB_Hearts" type="HBoxContainer" parent="MC/VBoxContainer/HB"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="L1" type="TextureRect" parent="MC/HB/HB_Hearts"]
+[node name="L1" type="TextureRect" parent="MC/VBoxContainer/HB/HB_Hearts"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("2_odpfj")
 stretch_mode = 4
 
-[node name="L2" type="TextureRect" parent="MC/HB/HB_Hearts"]
+[node name="L2" type="TextureRect" parent="MC/VBoxContainer/HB/HB_Hearts"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("2_odpfj")
 stretch_mode = 4
 
-[node name="L3" type="TextureRect" parent="MC/HB/HB_Hearts"]
+[node name="L3" type="TextureRect" parent="MC/VBoxContainer/HB/HB_Hearts"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("2_odpfj")
 stretch_mode = 4
 
-[node name="L4" type="TextureRect" parent="MC/HB/HB_Hearts"]
+[node name="L4" type="TextureRect" parent="MC/VBoxContainer/HB/HB_Hearts"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("2_odpfj")
 stretch_mode = 4
 
-[node name="L5" type="TextureRect" parent="MC/HB/HB_Hearts"]
+[node name="L5" type="TextureRect" parent="MC/VBoxContainer/HB/HB_Hearts"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("2_odpfj")
 stretch_mode = 4
+
+[node name="LevelLabel" type="Label" parent="MC/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Level: 0/3"
+label_settings = SubResource("LabelSettings_3tdj8")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -123,7 +140,7 @@ vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="ColorRect/vb_LevelComplete"]
 layout_mode = 2
-text = "Press Jump for next level"
+text = "Press Space for next level"
 label_settings = ExtResource("4_vq7ew")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -152,7 +169,7 @@ vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="ColorRect/vb_GameOver"]
 layout_mode = 2
-text = "Press Jump for main menu"
+text = "Press Space for main menu"
 label_settings = ExtResource("4_vq7ew")
 horizontal_alignment = 1
 vertical_alignment = 1

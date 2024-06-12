@@ -10,9 +10,13 @@ class_name Player
 @onready var sound_player = $SoundPlayer
 @onready var shooter = $Shooter
 @onready var animation_player_invincible = $AnimationPlayerInvincible
-@onready var invincible_timer = $InvincibleTimer
-@onready var hurt_timer = $HurtTimer
+@onready var invincible_timer = $Timers/InvincibleTimer
+@onready var hurt_timer = $Timers/HurtTimer
 @onready var hit_box = $HitBox
+@onready var dash_timer = $Timers/DashTimer
+@onready var dash_cd_timer = $Timers/DashCDTimer
+@onready var dash_player = $DashPlayer
+@onready var effect_player = $EffectPlayer
 
 
 const GRAVITY: float = 690.0
@@ -21,14 +25,19 @@ const MAX_FALL: float = 400.0
 const JUMP_VELOCITY: float = -260.0
 const _HURT_JUMP_VELOCITY: Vector2 = Vector2(0, -130.0)
 const FALLEN_OFF: float = 100.0
-
+const DASH_SPEED: float = 700.0
+const DASH_LENGTH: float = 0.1
+const DASH_HEIGHT: float = -700
 
 enum PLAYER_STATE { IDLE, RUN, JUMP, FALL, HURT, DASH }
 
-
+var _jump_height: float = -260
 var _state: PLAYER_STATE = PLAYER_STATE.IDLE
 var _invincible: bool = false
 var _lives: int = 5
+var _speed: float = 80.0
+var _dash_cd_time: float = 0.5
+var _dash_on_cd: bool = false
 
 
 func _ready():
@@ -40,7 +49,7 @@ func _physics_process(delta):
 	
 	if is_on_floor() == false:
 		velocity.y += GRAVITY * delta	
-		
+	
 	get_input()
 	move_and_slide()
 	calculate_states()
@@ -69,6 +78,12 @@ func shoot() -> void:
 	else:
 		shooter.shoot(Vector2.RIGHT)
 
+func dash() -> void:
+	_speed = DASH_SPEED
+	_jump_height = DASH_HEIGHT
+	SoundManager.play_clip(effect_player, SoundManager.SOUND_DASH)
+	dash_timer.start(DASH_LENGTH)
+
 func get_input() -> void:
 	if _state == PLAYER_STATE.HURT:
 		return
@@ -76,38 +91,44 @@ func get_input() -> void:
 	velocity.x = 0
 	
 	if Input.is_action_pressed("left") == true:
-		velocity.x = -RUN_SPEED
+		velocity.x = -_speed
 		sprite_2d.flip_h = true
 	elif Input.is_action_pressed("right") == true:
-		velocity.x = RUN_SPEED
+		velocity.x = _speed
 		sprite_2d.flip_h = false
 	
 	if Input.is_action_just_pressed("jump") == true and is_on_floor() == true:
-		velocity.y = JUMP_VELOCITY
+		velocity.y = _jump_height
 		SoundManager.play_clip(sound_player, SoundManager.SOUND_JUMP)
-	velocity.y = clampf(velocity.y, JUMP_VELOCITY, MAX_FALL)
+	velocity.y = clampf(velocity.y, _jump_height, MAX_FALL)
  
 func calculate_states() -> void:
 	if _state == PLAYER_STATE.HURT:
 		return
-	if is_on_floor() == true:
-		if velocity.x == 0:
-			set_state(PLAYER_STATE.IDLE)
+		
+	if Input.is_action_just_pressed("dash") and _dash_on_cd == false and velocity.x != 0:
+		set_state(PLAYER_STATE.DASH)
+		dash()
+	
+	if _state != PLAYER_STATE.DASH:
+		if is_on_floor() == true:
+			if velocity.x == 0:
+				set_state(PLAYER_STATE.IDLE)
+			else:
+				set_state(PLAYER_STATE.RUN)
 		else:
-			set_state(PLAYER_STATE.RUN)
-	else:
-		if velocity.y > 0:
-			set_state(PLAYER_STATE.FALL)
-		else:
-			set_state(PLAYER_STATE.JUMP)
+			if velocity.y > 0:
+				set_state(PLAYER_STATE.FALL)
+			else:
+				set_state(PLAYER_STATE.JUMP)
 
 func set_state(new_state: PLAYER_STATE) -> void:
 	if new_state == _state:
 		return
-	
+		
 	if _state == PLAYER_STATE.FALL:
 		if new_state == PLAYER_STATE.IDLE or new_state == PLAYER_STATE.RUN:
-			SoundManager.play_clip(sound_player, SoundManager.SOUND_LAND)
+			SoundManager.play_clip(effect_player, SoundManager.SOUND_LAND)
 	_state = new_state
 	
 	match _state:
@@ -121,6 +142,8 @@ func set_state(new_state: PLAYER_STATE) -> void:
 			animation_player.play("fall")
 		PLAYER_STATE.HURT:
 			apply_hurt_jump()
+		PLAYER_STATE.DASH:
+			dash_player.play("dash")
 
 func apply_hurt_jump() -> void:
 	animation_player.play("hurt")
@@ -170,3 +193,14 @@ func _on_invincible_timer_timeout():
 
 func _on_hurt_timer_timeout():
 	set_state(PLAYER_STATE.IDLE)
+
+func _on_dash_timer_timeout():
+	set_state(PLAYER_STATE.IDLE)
+	_speed = RUN_SPEED
+	_jump_height = JUMP_VELOCITY
+	dash_cd_timer.start(_dash_cd_time)
+	_dash_on_cd = true
+
+
+func _on_dash_cd_timer_timeout():
+	_dash_on_cd = false
