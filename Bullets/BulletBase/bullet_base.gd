@@ -22,5 +22,5 @@ func check_expired(delta: float) -> void:
 	if _life_time > _life_span:
 		queue_free()
 
-func _on_area_entered(area):
+func _on_area_entered(_area):
 	queue_free()

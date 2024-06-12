@@ -8,7 +8,7 @@ const OFF_SCREEN_KILL_ME: float = 1000.0
 
 @export var default_facing: FACING = FACING.LEFT
 @export var points: int = 1
-@export var speed: int = 30.3
+@export var speed: float = 30.0
 
 var _gravity: float = 800.0
 var _facing: float = default_facing
@@ -21,7 +21,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _physics_process(_delta):
 	fallen_off()
 
 func fallen_off() -> void:
@@ -47,5 +47,5 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 	pass # Replace with function body.
 
 
-func _on_hit_box_area_entered(area):
+func _on_hit_box_area_entered(_area):
 	die()

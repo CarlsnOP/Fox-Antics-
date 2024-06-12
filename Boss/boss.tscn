@@ -264,7 +264,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_r1bos")
 
 [node name="HitBox" type="Area2D" parent="Visual"]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Visual/HitBox"]

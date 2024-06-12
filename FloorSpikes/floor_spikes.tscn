@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_krgd1"]
 size = Vector2(14, 7)
 
-[node name="FloorSpikes" type="Area2D"]
+[node name="FloorSpikes" type="Area2D" groups=["Dangers"]]
 z_index = -1
 collision_layer = 4
 collision_mask = 0
