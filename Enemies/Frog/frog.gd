@@ -2,16 +2,21 @@ extends EnemyBase
 
 @onready var animated_sprite_2d = $AnimatedSprite2D
 @onready var jump_timer = $JumpTimer
+@onready var censor = $Censor
+@onready var censor_label = $CensorLabel
 
-const JUMP_VELOCITY: Vector2 = Vector2(100, -150)
+
+const JUMP_VELOCITY: Vector2 = Vector2(100, -300)
 const JUMP_WAIT_RANGE: Vector2 = Vector2(2.5, 5.0)
 
 var _jump: bool = false
 var _seen_player: bool = false
+var _frog_censored: bool = false
 
 func _ready():
 	super._ready()
 	start_timer()
+	SignalManager.censor_frog.connect(censor_frog)
 
 
 func _physics_process(delta):
@@ -25,6 +30,16 @@ func _physics_process(delta):
 	apply_jump()
 	move_and_slide()
 	flip_me()
+
+func censor_frog() -> void:
+	if _frog_censored == false:
+		censor.visible = true
+		censor_label.visible = true
+		_frog_censored = true
+	else:
+		censor.visible = false
+		censor_label.visible = false
+		_frog_censored = false
 
 func apply_jump() -> void:
 	if is_on_floor() == false:

@@ -64,7 +64,8 @@ scale = Vector2(1.04, 1)
 shape = SubResource("CircleShape2D_t1ivp")
 
 [node name="PlayerDetecter" type="RayCast2D" parent="." index="3"]
-target_position = Vector2(0, 300)
+position = Vector2(1, 13)
+target_position = Vector2(0, 200)
 collision_mask = 2
 collide_with_areas = true
 collide_with_bodies = false

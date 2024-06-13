@@ -1,8 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://dfir4nabc7vxm"]
+[gd_scene load_steps=16 format=3 uid="uid://dfir4nabc7vxm"]
 
 [ext_resource type="PackedScene" uid="uid://drs8j05li8fbt" path="res://Enemies/EnemyBase/enemy_base.tscn" id="1_tgffw"]
 [ext_resource type="Script" path="res://Enemies/Frog/frog.gd" id="2_1xra7"]
 [ext_resource type="Texture2D" uid="uid://jciekon1ppat" path="res://assets/enemies/frog/frog_sheet.png" id="3_7gsuj"]
+[ext_resource type="Texture2D" uid="uid://clhgawonnjebg" path="res://assets/enemies/frog/frog_censor.png" id="4_ec5e2"]
+[ext_resource type="LabelSettings" uid="uid://bw2v7ugbjtflf" path="res://assets/Censor.tres" id="5_qym0m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5jert"]
 atlas = ExtResource("3_7gsuj")
@@ -87,11 +89,23 @@ shape = SubResource("RectangleShape2D_p6dny")
 
 [node name="JumpTimer" type="Timer" parent="." index="3"]
 
-[node name="HitBox" parent="." index="4"]
-collision_layer = 0
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" index="0"]
 position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_dohic")
+
+[node name="Censor" type="Sprite2D" parent="." index="5"]
+visible = false
+scale = Vector2(0.28, 0.28)
+texture = ExtResource("4_ec5e2")
+
+[node name="CensorLabel" type="Label" parent="." index="6"]
+visible = false
+offset_left = -20.0
+offset_top = -8.0
+offset_right = 185.0
+offset_bottom = 58.0
+scale = Vector2(0.224389, 0.224389)
+text = "Censored"
+label_settings = ExtResource("5_qym0m")
 
 [connection signal="timeout" from="JumpTimer" to="." method="_on_jump_timer_timeout"]

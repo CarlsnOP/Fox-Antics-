@@ -1,8 +1,414 @@
-[gd_scene load_steps=2 format=3 uid="uid://dg6s6syl1jj4t"]
+[gd_scene load_steps=10 format=3 uid="uid://dg6s6syl1jj4t"]
 
 [ext_resource type="PackedScene" uid="uid://cwuj8rkolxfcf" path="res://LevelBase/level_base.tscn" id="1_mriax"]
+[ext_resource type="PackedScene" uid="uid://bppxdnx1u7vpd" path="res://Enemies/Snail/snail.tscn" id="2_cd0mw"]
+[ext_resource type="PackedScene" uid="uid://d0xka0f7eg4cb" path="res://FloorSpikes/floor_spikes.tscn" id="3_5f5sh"]
+[ext_resource type="LabelSettings" uid="uid://bw2v7ugbjtflf" path="res://assets/Censor.tres" id="4_atuno"]
+[ext_resource type="Texture2D" uid="uid://b707p0ibijjwa" path="res://assets/backgrounds/White.png" id="4_gytr4"]
+[ext_resource type="Texture2D" uid="uid://bldheaockvqwt" path="res://assets/enemies/frog/no_frog.png" id="4_v7ykf"]
+[ext_resource type="FontFile" uid="uid://dsgcwqlt3dii0" path="res://assets/fonts/gemunu-libre-v8-latin-700.ttf" id="5_e66l5"]
+[ext_resource type="Texture2D" uid="uid://clhgawonnjebg" path="res://assets/enemies/frog/frog_censor.png" id="5_nbb23"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hs6s2"]
+font = ExtResource("5_e66l5")
+font_size = 60
+font_color = Color(0.989668, 0.993732, 0.997099, 1)
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 0
+shadow_color = Color(0, 0, 0, 0.666667)
+shadow_offset = Vector2(0, 0)
 
 [node name="Level1" instance=ExtResource("1_mriax")]
 
-[node name="TileMap" parent="." index="1"]
-layer_0/tile_data = PackedInt32Array(-2, 458752, 0, -1, 458752, 0, -65536, 458752, 0, -65535, 458752, 0, -65534, 458752, 0, -65530, 458752, 0, -65529, 458752, 0, -65528, 458752, 0, -65527, 458752, 0, -65526, 458752, 0, -65525, 458752, 0, -65524, 458752, 0, -65523, 458752, 0, -65522, 458752, 0, -65521, 458752, 0, -65533, 458752, 0, -3, 458752, 0, -4, 458752, 0, -5, 458752, 0, -6, 458752, 0, -7, 458752, 0, -65520, 458752, 0, -65519, 458752, 0, -65516, 458752, 0, -65515, 458752, 0, -65514, 458752, 0, -65513, 458752, 0, -65512, 458752, 0, -65511, 458752, 0, 25, 458752, 0, 26, 458752, 0, 27, 458752, 0, 28, 458752, 0, -65508, 458752, 0, -65507, 458752, 0, -65506, 458752, 0, -65505, 458752, 0, -65510, 458752, 0, -65509, 458752, 0, -65504, 458752, 0, -65503, 458752, 0, -65502, 458752, 0, -65501, 458752, 0, -65500, 458752, 0, -65499, 458752, 0, -65498, 458752, 0, -65497, 458752, 0, -65496, 458752, 0, -65495, 458752, 0, -65494, 458752, 0, -65493, 458752, 0, -65492, 458752, 0, -65491, 458752, 0, -65490, 458752, 0, -65489, 458752, 0, -65488, 458752, 0, -65487, 458752, 0, -65486, 458752, 0, -65485, 458752, 0, -65484, 458752, 0, -65483, 458752, 0, -65482, 458752, 0, -65481, 458752, 0, -65480, 458752, 0, -65479, 458752, 0, -65478, 458752, 0, -65477, 458752, 0, -65476, 458752, 0, -65475, 458752, 0, -65474, 458752, 0, -65473, 458752, 0, -458725, 458752, 0, -458726, 458752, 0, -458727, 458752, 0, -458728, 458752, 0, -458729, 458752, 0, -458730, 458752, 0, -524267, 458752, 0, -262113, 458752, 0, -262112, 458752, 0, -262111, 458752, 0, -262110, 458752, 0, -262109, 458752, 0, -262108, 458752, 0, -262126, 458752, 0, -262127, 458752, 0, -262128, 458752, 0, -327664, 458752, 0, -327665, 458752, 0, -327666, 458752, 0, -327667, 458752, 0, -131079, 983040, 1, -65543, 983040, 2, -262151, 983040, 2, -196615, 983040, 0, -393223, 983040, 0, -327687, 983040, 1, -524295, 983040, 1, -458759, 983040, 2, -655367, 983040, 2, -589831, 983040, 0, -786439, 983040, 0, -720903, 983040, 1, -917511, 983040, 1, -851975, 983040, 2, -983047, 983040, 0)
+[node name="Controls" type="Node" parent="." index="0"]
+
+[node name="Label2" type="Label" parent="Controls" index="0"]
+z_index = -1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -304.0
+offset_top = -519.0
+offset_right = -67.0
+offset_bottom = -453.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.323725, 0.321142)
+text = "Move right"
+label_settings = SubResource("LabelSettings_hs6s2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="Controls" index="1"]
+z_index = -1
+offset_left = 230.0
+offset_top = -196.0
+offset_right = 294.0
+offset_bottom = -132.0
+scale = Vector2(0.5, 0.5)
+size_flags_horizontal = 4
+texture_normal = ExtResource("4_gytr4")
+
+[node name="Label" type="Label" parent="Controls/TextureButton" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -26.0
+offset_top = -47.0
+offset_right = 26.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "→"
+label_settings = ExtResource("4_atuno")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label8" type="Label" parent="Controls" index="2"]
+z_index = -1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -201.0
+offset_top = -518.0
+offset_right = 42.0
+offset_bottom = -452.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.323725, 0.321142)
+text = "Edita Filter"
+label_settings = SubResource("LabelSettings_hs6s2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label9" type="Label" parent="Controls" index="3"]
+z_index = -1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -218.0
+offset_top = -467.0
+offset_right = 394.0
+offset_bottom = -332.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.179157, 0.177728)
+text = "For people with frog phobia
+-press f"
+label_settings = SubResource("LabelSettings_hs6s2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EditaFilter" type="TextureButton" parent="Controls" index="4"]
+z_index = -1
+offset_left = 331.0
+offset_top = -198.0
+offset_right = 395.0
+offset_bottom = -134.0
+scale = Vector2(0.8, 0.8)
+size_flags_horizontal = 4
+texture_normal = ExtResource("4_v7ykf")
+
+[node name="Censor" type="Label" parent="Controls" index="5"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -198.0
+offset_top = -496.0
+offset_right = 7.0
+offset_bottom = -415.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.27571, 0.27571)
+text = "Censored"
+label_settings = ExtResource("4_atuno")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EditaFilter2" type="TextureButton" parent="Controls" index="6"]
+visible = false
+z_index = -1
+offset_left = 328.0
+offset_top = -198.0
+offset_right = 392.0
+offset_bottom = -134.0
+scale = Vector2(0.5, 0.5)
+size_flags_horizontal = 4
+texture_normal = ExtResource("5_nbb23")
+
+[node name="Label3" type="Label" parent="Controls" index="7"]
+z_index = -1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -385.0
+offset_top = -519.0
+offset_right = -148.0
+offset_bottom = -453.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.323725, 0.321142)
+text = "Move left"
+label_settings = SubResource("LabelSettings_hs6s2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton2" type="TextureButton" parent="Controls" index="8"]
+z_index = -1
+offset_left = 149.0
+offset_top = -196.0
+offset_right = 213.0
+offset_bottom = -132.0
+scale = Vector2(0.5, 0.5)
+size_flags_horizontal = 4
+texture_normal = ExtResource("4_gytr4")
+
+[node name="Label" type="Label" parent="Controls/TextureButton2" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -26.0
+offset_top = -47.0
+offset_right = 26.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "←"
+label_settings = ExtResource("4_atuno")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="Controls" index="9"]
+z_index = -1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -344.0
+offset_top = -462.0
+offset_right = -86.0
+offset_bottom = -396.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.323725, 0.321142)
+text = "Move down"
+label_settings = SubResource("LabelSettings_hs6s2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton3" type="TextureButton" parent="Controls" index="10"]
+z_index = -1
+offset_left = 190.0
+offset_top = -196.0
+offset_right = 254.0
+offset_bottom = -132.0
+scale = Vector2(0.5, 0.5)
+size_flags_horizontal = 4
+texture_normal = ExtResource("4_gytr4")
+
+[node name="Label" type="Label" parent="Controls/TextureButton3" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -26.0
+offset_top = -47.0
+offset_right = 26.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "↓"
+label_settings = ExtResource("4_atuno")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label5" type="Label" parent="Controls" index="11"]
+z_index = -1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -471.0
+offset_top = -517.0
+offset_right = -234.0
+offset_bottom = -451.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.323725, 0.321142)
+text = "Shoot"
+label_settings = SubResource("LabelSettings_hs6s2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton4" type="TextureButton" parent="Controls" index="12"]
+z_index = -1
+offset_left = 63.0
+offset_top = -194.0
+offset_right = 127.0
+offset_bottom = -130.0
+scale = Vector2(0.5, 0.5)
+size_flags_horizontal = 4
+texture_normal = ExtResource("4_gytr4")
+
+[node name="Label" type="Label" parent="Controls/TextureButton4" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -26.0
+offset_top = -47.0
+offset_right = 26.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "c"
+label_settings = ExtResource("4_atuno")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label6" type="Label" parent="Controls" index="13"]
+z_index = -1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -552.0
+offset_top = -517.0
+offset_right = -315.0
+offset_bottom = -451.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.323725, 0.321142)
+text = "Dash"
+label_settings = SubResource("LabelSettings_hs6s2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton5" type="TextureButton" parent="Controls" index="14"]
+z_index = -1
+offset_left = -18.0
+offset_top = -194.0
+offset_right = 46.0
+offset_bottom = -130.0
+scale = Vector2(0.5, 0.5)
+size_flags_horizontal = 4
+texture_normal = ExtResource("4_gytr4")
+
+[node name="Label" type="Label" parent="Controls/TextureButton5" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -26.0
+offset_top = -47.0
+offset_right = 26.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "z"
+label_settings = ExtResource("4_atuno")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label7" type="Label" parent="Controls" index="15"]
+z_index = -1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -511.0
+offset_top = -460.0
+offset_right = -253.0
+offset_bottom = -394.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.323725, 0.321142)
+text = "Jump"
+label_settings = SubResource("LabelSettings_hs6s2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton6" type="TextureButton" parent="Controls" index="16"]
+z_index = -1
+offset_left = 23.0
+offset_top = -194.0
+offset_right = 87.0
+offset_bottom = -130.0
+scale = Vector2(0.5, 0.5)
+size_flags_horizontal = 4
+texture_normal = ExtResource("4_gytr4")
+
+[node name="Label" type="Label" parent="Controls/TextureButton6" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -26.0
+offset_top = -47.0
+offset_right = 26.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "x"
+label_settings = ExtResource("4_atuno")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TileMap" parent="." index="2"]
+layer_0/tile_data = PackedInt32Array(-2, 458752, 0, -1, 458752, 0, -65536, 458752, 0, -65535, 458752, 0, -65534, 458752, 0, -65533, 458752, 0, -3, 458752, 0, -4, 458752, 0, -5, 458752, 0, -6, 393216, 0, -7, 983040, 2, -65496, 458752, 0, -65495, 458752, 0, -65494, 458752, 0, -65493, 458752, 0, -65492, 458752, 0, -65491, 458752, 0, -65490, 458752, 0, -65489, 458752, 0, -65488, 458752, 0, -65487, 458752, 0, -65486, 458752, 0, -65485, 458752, 0, -65484, 458752, 0, -65483, 458752, 0, -65482, 458752, 0, -65481, 458752, 0, -65480, 458752, 0, -65479, 458752, 0, -65478, 458752, 0, -65477, 458752, 0, -65476, 458752, 0, -65475, 458752, 0, -65474, 458752, 0, -65473, 458752, 0, -196605, 983040, 1, -131069, 983040, 2, -131080, 983040, 0, -65544, 983040, 1, -8, 983040, 2, -327688, 983040, 0, -262152, 983040, 1, -196616, 983040, 2, -131079, 983040, 0, -65543, 983040, 1, -327687, 983040, 0, -262151, 983040, 1, -196615, 983040, 2, -524295, 983040, 0, -458759, 983040, 1, -393223, 983040, 2, -720903, 983040, 0, -655367, 983040, 1, -589831, 983040, 2, -917511, 983040, 0, -851975, 983040, 1, -786439, 983040, 2, -1114119, 983040, 0, -1048583, 983040, 1, -983047, 983040, 2, -1310727, 983040, 0, -1245191, 983040, 1, -1179655, 983040, 2, -1507335, 983040, 0, -1441799, 983040, 1, -1376263, 983040, 2, -65532, 458752, 0, -65531, 458752, 0, -65530, 458752, 0, -65529, 458752, 0, -65528, 458752, 0, -65526, 458752, 0, -65525, 458752, 0, -65524, 458752, 0, -65523, 458752, 0, -65522, 458752, 0, -65521, 458752, 0, -65520, 458752, 0, -262141, 983040, 1, -327677, 983040, 0, -458735, 1114112, 4, -393199, 1114112, 5, -327663, 1114112, 6, -458734, 1179648, 4, -393198, 1179648, 5, -327662, 1179648, 6, -458733, 1245184, 4, -393197, 1245184, 5, -327661, 1245184, 6, -65519, 458752, 0, -65518, 458752, 0, -65517, 458752, 0, -65516, 458752, 0, -65515, 458752, 0, -65514, 458752, 0, -65513, 458752, 0, -65512, 458752, 0, -65511, 458752, 0, -65510, 458752, 0, -65509, 458752, 0, -65508, 458752, 0, -65507, 458752, 0, -131032, 1179648, 4, -196568, 1179648, 4, -262104, 1179648, 4, -327640, 1179648, 4, -393176, 1179648, 4, -458712, 1179648, 4, -524248, 1179648, 4, -589784, 1179648, 4, -655320, 1179648, 4, -720856, 1179648, 4, -786392, 1179648, 4, -851928, 1179648, 4, -917464, 1179648, 4, -65497, 458752, 0, -65498, 458752, 0, -65499, 458752, 0, -65500, 458752, 0, -65501, 458752, 0, -65502, 458752, 0, -65503, 458752, 0, -65504, 458752, 0, -65505, 458752, 0, -65506, 458752, 0, -589792, 786432, 0, -589791, 851968, 0, -589790, 917504, 0, -917462, 1114112, 1, -917460, 1245184, 4, -851924, 1245184, 4, -786388, 1245184, 4, -720852, 1245184, 4, -655316, 1245184, 4, -589780, 1245184, 4, -524244, 1245184, 4, -458708, 1245184, 4, -393172, 1245184, 4, -327636, 1245184, 4, -982996, 1245184, 4, -1048532, 1245184, 4, -1114068, 1245184, 4, -1179604, 1245184, 4, -1245140, 1245184, 4, -1310676, 1245184, 4, -1376212, 1245184, 4, -1441748, 1245184, 4, -1507284, 1245184, 4, -1572820, 1245184, 4, -1638356, 1245184, 4, -1703892, 1245184, 4, -1769428, 1245184, 4, -1834964, 1245184, 4, -1834963, 1245184, 4, -1834962, 1245184, 4, -1834961, 1245184, 4, -1834960, 1245184, 4, -1834959, 1245184, 4, -1834958, 1245184, 4, -1834957, 1245184, 4, -1834956, 1245184, 4, -1834955, 1245184, 4, -1834954, 1245184, 4, -1834953, 1245184, 4, -131017, 1179648, 5, -196553, 1179648, 5, -262089, 1179648, 5, -327625, 1179648, 5, -393161, 1179648, 5, -458697, 1179648, 5, -524233, 1179648, 5, -589769, 1179648, 5, -655305, 1179648, 5, -720841, 1179648, 5, -786377, 1179648, 5, -851913, 1179648, 5, -917449, 1179648, 5, -982985, 1179648, 5, -1048521, 1179648, 5, -1114057, 1179648, 5, -1179593, 1179648, 5, -1245129, 1179648, 5, -1310665, 1179648, 5, -1376201, 1179648, 5, -1441737, 1179648, 5, -1507273, 1179648, 5, -1638345, 1179648, 5, -1703881, 1179648, 5, -1769417, 1179648, 5, -1572809, 1179648, 5, -393168, 1114112, 1)
+
+[node name="PlayerCam" parent="." index="3"]
+limit_left = -95
+
+[node name="Boss" parent="." index="9"]
+position = Vector2(862, -14)
+
+[node name="Checkpoint" parent="." index="10"]
+position = Vector2(787, -95)
+
+[node name="Snail" parent="." index="11" instance=ExtResource("2_cd0mw")]
+position = Vector2(203, -26)
+
+[node name="FloorSpikes" parent="." index="12" instance=ExtResource("3_5f5sh")]
+position = Vector2(455, -14)
+
+[node name="FloorSpikes2" parent="." index="13" instance=ExtResource("3_5f5sh")]
+position = Vector2(470, -14)
+
+[node name="FloorSpikes3" parent="." index="14" instance=ExtResource("3_5f5sh")]
+position = Vector2(485, -14)
+
+[node name="FloorSpikes4" parent="." index="15" instance=ExtResource("3_5f5sh")]
+position = Vector2(501, -14)
+
+[editable path="CanvasLayer/HUD"]

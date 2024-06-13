@@ -116,3 +116,4 @@ vertical_alignment = 1
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_ua4qr")
 autoplay = true
+bus = &"Music"

@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" path="res://Enemies/EnemyBase/enemy_base.gd" id="1_37jqy"]
 
-[node name="EnemyBase" type="CharacterBody2D"]
+[node name="EnemyBase" type="CharacterBody2D" groups=["Dangers"]]
 collision_layer = 0
+collision_mask = 65
 script = ExtResource("1_37jqy")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

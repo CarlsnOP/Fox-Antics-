@@ -7,3 +7,5 @@ signal on_player_hit(lives: int)
 signal on_level_complete
 signal on_game_over
 signal on_score_updated
+signal gatling_gun_pickup
+signal censor_frog

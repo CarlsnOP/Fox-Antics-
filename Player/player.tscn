@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://xlf2t4pr0xn4"]
+[gd_scene load_steps=23 format=3 uid="uid://xlf2t4pr0xn4"]
 
 [ext_resource type="Texture2D" uid="uid://i3gcjsxc30rb" path="res://assets/player/player.png" id="1_rte2f"]
 [ext_resource type="Script" path="res://Player/player.gd" id="1_ytwtl"]
 [ext_resource type="PackedScene" uid="uid://b388ibxrhdgac" path="res://Shooter/shooter.tscn" id="3_qodg7"]
 [ext_resource type="PackedScene" uid="uid://ub6lfkkhv8wa" path="res://Dash/dash.tscn" id="4_j3o7q"]
+[ext_resource type="Texture2D" uid="uid://c0uahwxnr7ogk" path="res://assets/gun/gun.png" id="5_ma6mm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1w1ms"]
 size = Vector2(10, 16)
@@ -121,6 +122,45 @@ _data = {
 "run": SubResource("Animation_lm5hr")
 }
 
+[sub_resource type="Animation" id="Animation_y2m7s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_resr8"]
 resource_name = "dash"
 length = 0.2
@@ -137,25 +177,39 @@ tracks/0/keys = {
 "values": [Color(0.405178, 0.592296, 1, 1), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_y2m7s"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_ec46r"]
+resource_name = "duck"
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite2D:self_modulate")
+tracks/0/path = NodePath("../Sprite2D:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Vector2(1, 1), Vector2(1, 0.5), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 8), Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hmm4b"]
 _data = {
 "RESET": SubResource("Animation_y2m7s"),
-"dash": SubResource("Animation_resr8")
+"dash": SubResource("Animation_resr8"),
+"duck": SubResource("Animation_ec46r")
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_irxs8"]
@@ -202,6 +256,7 @@ _data = {
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 32
+collision_mask = 65
 script = ExtResource("1_ytwtl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -226,6 +281,7 @@ libraries = {
 }
 
 [node name="DebugLabel" type="Label" parent="."]
+visible = false
 offset_left = -14.0
 offset_top = -35.0
 offset_right = 93.0
@@ -238,15 +294,15 @@ asa"
 
 [node name="SoundPlayer" type="AudioStreamPlayer2D" parent="." groups=["player"]]
 visible = false
-volume_db = -10.0
+bus = &"Music"
 
 [node name="EffectPlayer" type="AudioStreamPlayer2D" parent="." groups=["player"]]
 visible = false
-volume_db = 15.0
+bus = &"SFX"
 
 [node name="HitBox" type="Area2D" parent="."]
 collision_layer = 2
-collision_mask = 20
+collision_mask = 148
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(-1, 6)
@@ -279,8 +335,21 @@ one_shot = true
 [node name="DashCDTimer" type="Timer" parent="Timers"]
 one_shot = true
 
+[node name="DuckTimer" type="Timer" parent="Timers"]
+wait_time = 0.1
+one_shot = true
+
+[node name="Gun" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(10, 10)
+scale = Vector2(0.01, 0.01)
+texture = ExtResource("5_ma6mm")
+flip_h = true
+
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="timeout" from="Timers/InvincibleTimer" to="." method="_on_invincible_timer_timeout"]
 [connection signal="timeout" from="Timers/HurtTimer" to="." method="_on_hurt_timer_timeout"]
 [connection signal="timeout" from="Timers/DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="Timers/DashCDTimer" to="." method="_on_dash_cd_timer_timeout"]
+[connection signal="timeout" from="Timers/DuckTimer" to="." method="_on_duck_timeout"]
+[connection signal="timeout" from="Timers/DuckTimer" to="." method="_on_duck_timer_timeout"]
