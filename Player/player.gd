@@ -40,12 +40,15 @@ var _speed: float = 80.0
 var _dash_cd_time: float = 0.5
 var _dash_on_cd: bool = false
 var _can_double_jump: bool = false
+var _gun_picked_up: bool = false
 
 
 func _ready():
 	gun.visible = false
 	SignalManager.on_player_hit.emit(_lives)
 	SignalManager.gatling_gun_pickup.connect(gatling_gun_pickup)
+	if _gun_picked_up == true:
+		gatling_gun_pickup()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -74,6 +77,7 @@ func update_debug_label() -> void:
 
 func gatling_gun_pickup() -> void:
 	gun.visible = true
+	_gun_picked_up = true
 
 func fallen_off() -> void:
 	if global_position.y < FALLEN_OFF:

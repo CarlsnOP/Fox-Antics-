@@ -1,13 +1,17 @@
-[gd_scene load_steps=10 format=3 uid="uid://dg6s6syl1jj4t"]
+[gd_scene load_steps=14 format=3 uid="uid://dg6s6syl1jj4t"]
 
 [ext_resource type="PackedScene" uid="uid://cwuj8rkolxfcf" path="res://LevelBase/level_base.tscn" id="1_mriax"]
 [ext_resource type="PackedScene" uid="uid://bppxdnx1u7vpd" path="res://Enemies/Snail/snail.tscn" id="2_cd0mw"]
 [ext_resource type="PackedScene" uid="uid://d0xka0f7eg4cb" path="res://FloorSpikes/floor_spikes.tscn" id="3_5f5sh"]
+[ext_resource type="Texture2D" uid="uid://b2skguwnh4g0k" path="res://assets/backgrounds/White_right.png" id="3_232k5"]
 [ext_resource type="LabelSettings" uid="uid://bw2v7ugbjtflf" path="res://assets/Censor.tres" id="4_atuno"]
 [ext_resource type="Texture2D" uid="uid://b707p0ibijjwa" path="res://assets/backgrounds/White.png" id="4_gytr4"]
 [ext_resource type="Texture2D" uid="uid://bldheaockvqwt" path="res://assets/enemies/frog/no_frog.png" id="4_v7ykf"]
 [ext_resource type="FontFile" uid="uid://dsgcwqlt3dii0" path="res://assets/fonts/gemunu-libre-v8-latin-700.ttf" id="5_e66l5"]
 [ext_resource type="Texture2D" uid="uid://clhgawonnjebg" path="res://assets/enemies/frog/frog_censor.png" id="5_nbb23"]
+[ext_resource type="Texture2D" uid="uid://rerdyi148rbg" path="res://assets/backgrounds/White_left.png" id="7_qag4d"]
+[ext_resource type="Texture2D" uid="uid://debpwmnewuok4" path="res://assets/backgrounds/White_down.png" id="8_ligo5"]
+[ext_resource type="PackedScene" uid="uid://cy4lu30urh0co" path="res://GatlingGun/gatling_gun.tscn" id="12_bdp3r"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_hs6s2"]
 font = ExtResource("5_e66l5")
@@ -50,25 +54,7 @@ offset_right = 294.0
 offset_bottom = -132.0
 scale = Vector2(0.5, 0.5)
 size_flags_horizontal = 4
-texture_normal = ExtResource("4_gytr4")
-
-[node name="Label" type="Label" parent="Controls/TextureButton" index="0"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -26.0
-offset_top = -47.0
-offset_right = 26.0
-offset_bottom = 34.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "→"
-label_settings = ExtResource("4_atuno")
-horizontal_alignment = 1
-vertical_alignment = 1
+texture_normal = ExtResource("3_232k5")
 
 [node name="Label8" type="Label" parent="Controls" index="2"]
 z_index = -1
@@ -176,25 +162,7 @@ offset_right = 213.0
 offset_bottom = -132.0
 scale = Vector2(0.5, 0.5)
 size_flags_horizontal = 4
-texture_normal = ExtResource("4_gytr4")
-
-[node name="Label" type="Label" parent="Controls/TextureButton2" index="0"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -26.0
-offset_top = -47.0
-offset_right = 26.0
-offset_bottom = 34.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "←"
-label_settings = ExtResource("4_atuno")
-horizontal_alignment = 1
-vertical_alignment = 1
+texture_normal = ExtResource("7_qag4d")
 
 [node name="Label4" type="Label" parent="Controls" index="9"]
 z_index = -1
@@ -223,25 +191,7 @@ offset_right = 254.0
 offset_bottom = -132.0
 scale = Vector2(0.5, 0.5)
 size_flags_horizontal = 4
-texture_normal = ExtResource("4_gytr4")
-
-[node name="Label" type="Label" parent="Controls/TextureButton3" index="0"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -26.0
-offset_top = -47.0
-offset_right = 26.0
-offset_bottom = 34.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "↓"
-label_settings = ExtResource("4_atuno")
-horizontal_alignment = 1
-vertical_alignment = 1
+texture_normal = ExtResource("8_ligo5")
 
 [node name="Label5" type="Label" parent="Controls" index="11"]
 z_index = -1
@@ -410,5 +360,8 @@ position = Vector2(485, -14)
 
 [node name="FloorSpikes4" parent="." index="15" instance=ExtResource("3_5f5sh")]
 position = Vector2(501, -14)
+
+[node name="GatlingGun" parent="." index="16" instance=ExtResource("12_bdp3r")]
+position = Vector2(298, -124)
 
 [editable path="CanvasLayer/HUD"]

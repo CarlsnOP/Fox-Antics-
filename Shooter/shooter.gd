@@ -15,6 +15,8 @@ var _gatling_enabled: bool = false
 func _ready():
 	shoot_timer.wait_time = shoot_delay
 	SignalManager.gatling_gun_pickup.connect(gatling_gun_pickup)
+	if _gatling_enabled == true:
+		gatling_gun_pickup()
 
 func shoot(direction: Vector2) -> void:
 	if _can_shoot == false:

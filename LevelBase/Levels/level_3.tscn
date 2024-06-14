@@ -192,4 +192,5 @@ position = Vector2(-178, -373)
 [node name="Frog9" parent="Monsters" index="27" instance=ExtResource("7_0qfcb")]
 position = Vector2(112, -317)
 
+[editable path="CanvasLayer/HUD"]
 [editable path="Boss"]

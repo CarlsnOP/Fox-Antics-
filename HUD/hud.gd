@@ -22,10 +22,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if vb_level_complete.visible == true:
-		if Input.is_action_just_pressed("shoot") == true:
+		if Input.is_action_just_pressed("next") == true:
 			GameManager.load_next_level_scene()
 	if vb_game_over.visible == true:
-		if Input.is_action_just_pressed("shoot") == true:
+		if Input.is_action_just_pressed("next") == true:
 			GameManager.load_main_scene()
 	level_label.text = str("Level: ", GameManager.get_current_level(), "/3")
 
